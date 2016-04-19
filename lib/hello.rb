@@ -38,4 +38,10 @@ module Hello
       value.size.eql?(l.to_i) ? @value = value : nil
     end
   end
+
+  class Case
+    def initialize(value)
+
+    end
+  end
 end

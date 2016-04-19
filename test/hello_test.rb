@@ -28,8 +28,8 @@ class HelloTest < Minitest::Test
     assert_equal 4, @hello.n
   end
 
-  def test_it_has_words
-    assert_equal 5, @hello.words.size
+  def test_it_has_expected_amount_of_words
+    assert_equal @hello.d, @hello.words.count
   end
 
   def test_it_has_expected_words
@@ -44,18 +44,20 @@ class HelloTest < Minitest::Test
     end
   end
 
-  def test_it_has_expected_amount_of_words
-    assert_equal @hello.d, @hello.words.count
-  end
-
-  def test_it_has_cases
-    assert_equal 4, @hello.cases.size
+  def test_it_has_expected_amount_of_cases
+    assert_equal @hello.n, @hello.cases.count
   end
 
   def test_it_has_expected_cases
     expected_cases = %w[(ab)(bc)(ca) abc (abc)(abc)(abc) (zyx)bc]
 
     assert_equal expected_cases, @hello.cases
+  end
+
+  def test_it_has_valid_cases
+    @hello.cases.each do |kase|
+      assert_match /\A([a-z]*|\([a-z]+\)*)+\z/, kase
+    end
   end
 
   def test_it_verify_words_versus_cases
