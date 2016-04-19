@@ -12,7 +12,8 @@ module Hello
       @words = []
       @cases = []
       (file[1..@d]).each do |word|
-        @words << word
+        new_word = Word.new(word, @l)
+        @words << word if new_word
       end
       (file[(@d + 1)..-1]).each do |kase|
         @cases << kase
@@ -20,12 +21,21 @@ module Hello
     end
 
     def match
-      cases.map do |kase|
+      cases.each_with_index.map do |kase, i|
         regex = Regexp.new(kase.gsub('(', '[').gsub(')', ']'))
-        words.inject(0) do |acc, word|
+        count = words.inject(0) do |acc, word|
           regex.match(word) ? acc + 1 : acc
         end
+        "Case ##{i + 1}: #{count}"
       end
+    end
+  end
+
+  class Word
+    attr_reader :value
+
+    def initialize(value, l)
+      value.size.eql?(l.to_i) ? @value = value : nil
     end
   end
 end

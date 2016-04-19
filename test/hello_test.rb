@@ -3,16 +3,16 @@ require 'test_helper'
 class HelloTest < Minitest::Test
   def setup
     @file = [
-      '3 5 4',
-      'abc',
-      'bca',
-      'dac',
-      'dbc',
-      'cba',
-      '(ab)(bc)(ca)',
-      'abc',
-      '(abc)(abc)(abc)',
-      '(zyx)bc'
+        '3 5 4',
+        'abc',
+        'bca',
+        'dac',
+        'dbc',
+        'cba',
+        '(ab)(bc)(ca)',
+        'abc',
+        '(abc)(abc)(abc)',
+        '(zyx)bc'
     ]
 
     @hello = Hello::Language.new(@file)
@@ -59,7 +59,12 @@ class HelloTest < Minitest::Test
   end
 
   def test_it_verify_words_versus_cases
-    expected_result = [2, 1, 3, 0]
+    expected_result = [
+        'Case #1: 2',
+        'Case #2: 1',
+        'Case #3: 3',
+        'Case #4: 0'
+    ]
 
     assert_equal expected_result, @hello.match
   end
