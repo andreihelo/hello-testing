@@ -28,18 +28,24 @@ class HelloTest < Minitest::Test
     assert_equal 4, @hello.n
   end
 
-  def test_it_has_tokens
-    assert_equal 5, @hello.tokens.size
+  def test_it_has_words
+    assert_equal 5, @hello.words.size
   end
 
-  def test_it_has_expected_tokens
-    expected_tokens = %w[abc bca dac dbc cba]
+  def test_it_has_expected_words
+    expected_words = %w[abc bca dac dbc cba]
 
-    assert_equal expected_tokens, @hello.tokens
+    assert_equal expected_words, @hello.words
   end
 
   def test_it_has_valid_words
-    
+    @hello.words.each do |word|
+      assert_equal @hello.l, word.size
+    end
+  end
+
+  def test_it_has_expected_amount_of_words
+    assert_equal @hello.d, @hello.words.count
   end
 
   def test_it_has_cases
